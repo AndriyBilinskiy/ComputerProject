@@ -24,8 +24,8 @@ def combinations_with_replacement(iterable, r: int):
     """
     iterable = tuple(iterable)
     lenth = len(iterable)
-    if not lenth and r:
-        return
+    if r > lenth :
+        raise ValueError
     indices = [0] * r
     yield tuple(iterable[i] for i in indices)
     while True:
@@ -37,7 +37,7 @@ def combinations_with_replacement(iterable, r: int):
         indices[i:] = [indices[i] + 1] * (r - i)
         yield tuple(iterable[i] for i in indices)
     
-#(list (i for i in (combinations_with_replacement('ABC', 2))))
+print(list (i for i in (combinations_with_replacement('ABC', 2))))
 
 # for i in count(start=2, step=2, endpoint = 400):
 #     print(i)
