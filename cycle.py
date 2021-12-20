@@ -19,7 +19,7 @@ def cycle(iterable, endpoint=None):
                 ans.append(letters)
                 # appending the generator in the empty list
             while ans:
-                # excluding the None and negative cases
+                # excluding the None and negative cases and making an infinite loop
                 for letters in ans:
                     yield letters
                     # returning a generator of the ans list
