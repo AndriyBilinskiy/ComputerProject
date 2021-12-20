@@ -3,7 +3,7 @@ from typing import Union
 Realization of analogs for some functions forom itertools library.
 """
 
-def count(start: Union[int, float] = 0, step: Union[int, float] = 1):
+def count(start: Union[int, float] = 0, step: Union[int, float] = 1, endpoint = None):
     """
     Returns an generator of the infinite sequence of nuberes spaced by step
     starting with start
@@ -13,10 +13,12 @@ def count(start: Union[int, float] = 0, step: Union[int, float] = 1):
             while True:
                 yield number
                 number += step
+                if not endpoint is None and number > endpoint:
+                    return
     raise TypeError
 
-print(count(2,2))
-def combinations_with_replacement(iterable, r:int):
+
+def combinations_with_replacement(iterable, r: int):
     """
     This function returns r length combinations with replacrment(Order doesn't metter)
     """
@@ -37,5 +39,5 @@ def combinations_with_replacement(iterable, r:int):
     
 #(list (i for i in (combinations_with_replacement('ABC', 2))))
 
-for i in count(start=2, step=2):
-    print(i)
+# for i in count(start=2, step=2, endpoint = 400):
+#     print(i)
