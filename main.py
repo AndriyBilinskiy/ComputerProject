@@ -8,10 +8,12 @@ def count(start: Union[int, float] = 0, step: Union[int, float] = 1):
     Returns an generator of the infinite sequence of nuberes spaced by step
     starting with start
     """
-    number = start
-    while True:
-        yield number
-        number += step
+    if type(start) in (int, float) and type(step) in (int, float):
+            number = start
+            while True:
+                yield number
+                number += step
+    raise TypeError
 
 print(count(2,2))
 def combinations_with_replacement(iterable, r:int):
