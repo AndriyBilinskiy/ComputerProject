@@ -5,7 +5,6 @@ def cycle(iterable, endpoint=None):
     Returns a generator of a cycle
     :param iterable: str
     :param endpoint: optional
-    for _ in cycle(iterable): print("x")
     """
     try:
         # processing exceptions
