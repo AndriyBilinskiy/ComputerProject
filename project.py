@@ -69,27 +69,26 @@ def cycle(iterable, endpoint=None):
     Function for itertools.cycle()
     Makes an iterable cycle of every element.
     Returns a generator of a cycle
-    :param iterable: str
+    :param iterable: any iterable type
     :param endpoint: optional
+    for _ in cycle(iterable): print("x")
     """
-    try:
-        # processing exceptions
-        if endpoint is not None:
-            # making an endpoint
-            ans: list = []
-            # an empty list for an answer
-            for letters in iterable:
-                yield letters
-                # a generated object for iterable var
-                ans.append(letters)
-                # appending the generator in the empty list
-            for letters in ans*endpoint:
-                # making a loop of endpoint number of times
-                yield letters
-                # returning a generator of the ans list
+    list_to_save = []
+    for element in iterable:
+        yield element
+        if not endpoint is None:
+            endpoint -= 1
+            if endpoint <=0 :
+                return
+        list_to_save.append(element)
+    while True:
+        for element in list_to_save:
+            yield element
+            if not endpoint is None:
+                endpoint -= 1
+                if endpoint <=0 :
+                    return
 
-    except TypeError:
-        raise TypeError
    
 def product(*iterables, repeat=1):
     """
