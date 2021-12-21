@@ -76,7 +76,8 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(
             list(map(lambda x: x[0] * x[1], product([12, 16], [15, 20]))),
             [180, 240, 240, 320])
-
+        self.assertRaises(TypeError, product("1", 2, repeat=1))
+        
     def test_permutations(self):
         self.assertEqual(list(permutations("abc")), [('a', 'b', 'c'),
                                                      ('a', 'c', 'b'),
