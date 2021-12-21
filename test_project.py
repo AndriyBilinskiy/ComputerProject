@@ -46,7 +46,22 @@ class TestFunctions(unittest.TestCase):
         self.assertRaises(TypeError, combinations_with_replacement("math", 7))
 
     def test_cycle(self):
-        pass
+            self.assertCountEqual(list(cycle("abc", 2)), list(cycle("bca", 2)))
+            self.assertEqual(list(cycle("abc", 2)),
+                             ['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c'])
+            self.assertEqual(tuple(cycle([1], 2)),
+                             tuple(list(map(int, (cycle("1", 2))))))
+            self.assertEqual(list(zip(cycle(range(5), 9), range(10))), [(0, 0),
+                                                                        (1, 1),
+                                                                        (2, 2),
+                                                                        (3, 3),
+                                                                        (4, 4),
+                                                                        (0, 5),
+                                                                        (1, 6),
+                                                                        (2, 7),
+                                                                        (3, 8),
+                                                                        (4, 9)])
+            
 
     def test_product(self):
         self.assertEqual(list(product("ab", "c", repeat=2)),
