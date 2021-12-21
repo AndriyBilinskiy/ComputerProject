@@ -116,6 +116,12 @@ def product(*iterables, repeat=1):
         print("Type error")
 
 def permutations(iterable, length=None):
+    """
+    Version of permutations without repetitions
+    P(n) = n!
+    iterable: (list, tuple)
+    r: int
+    """
     elems = tuple(iterable)
     lennn = len(iterable)
     length = lennn if not length else length
@@ -139,6 +145,12 @@ def permutations(iterable, length=None):
             return
 
 def combinations(iterable, r):
+    """
+    Version of combinations without repetitions
+    C(n, k) = n! / ((n-k)! * k!)
+    iterable: (list, tuple)
+    r: int
+    """
     pool = tuple(iterable)
     n = len(pool)
     if r > n:
@@ -159,7 +171,10 @@ def combinations(iterable, r):
     
 def permutations_repetitions(iterable, r: int):
     """
-    This function returns r length combinations with replacrment(Order does metter)
+    Version of permutation with replacement.
+    A(n, r) = n^r
+    iterable: (list, tuple)
+    r: int
     """
     if r > len(iterable): # ensures that the length of combinations is 
         #less than the lenth of a iterable object
