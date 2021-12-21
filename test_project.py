@@ -4,7 +4,7 @@ repeat, count, combinations_with_replacement, cycle, product, combinations, perm
 """
 
 import unittest
-from project import repeat, count, combinations_with_replacement, cycle, product, combinations, permutations
+from project import repeat, count, combinations_with_replacement, cycle, product, combinations, permutations, permutations_repetitions
 
 
 class TestFunctions(unittest.TestCase):
@@ -46,22 +46,21 @@ class TestFunctions(unittest.TestCase):
         self.assertRaises(TypeError, combinations_with_replacement("math", 7))
 
     def test_cycle(self):
-            self.assertCountEqual(list(cycle("abc", 2)), list(cycle("bca", 2)))
-            self.assertEqual(list(cycle("abc", 2)),
-                             ['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c'])
-            self.assertEqual(tuple(cycle([1], 2)),
-                             tuple(list(map(int, (cycle("1", 2))))))
-            self.assertEqual(list(zip(cycle(range(5), 9), range(10))), [(0, 0),
-                                                                        (1, 1),
-                                                                        (2, 2),
-                                                                        (3, 3),
-                                                                        (4, 4),
-                                                                        (0, 5),
-                                                                        (1, 6),
-                                                                        (2, 7),
-                                                                        (3, 8),
-                                                                        (4, 9)])
-            
+        self.assertCountEqual(list(cycle("abc",6)), list(cycle("bca", 6)))
+        self.assertEqual(list(cycle("abc", 9)),
+                         ['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c'])
+        self.assertEqual(tuple(cycle([1], 2)),
+                         tuple(list(map(int, (cycle("1", 2))))))
+        self.assertEqual(list(zip(cycle(range(5), 10), range(10))), [(0, 0),
+                                                                    (1, 1),
+                                                                    (2, 2),
+                                                                    (3, 3),
+                                                                    (4, 4),
+                                                                    (0, 5),
+                                                                    (1, 6),
+                                                                    (2, 7),
+                                                                    (3, 8),
+                                                                    (4, 9)])
 
     def test_product(self):
         self.assertEqual(list(product("ab", "c", repeat=2)),
@@ -74,7 +73,9 @@ class TestFunctions(unittest.TestCase):
                 map(lambda x: list(map(ord, x)), product(['a', 'b'],
                                                          ['c', 'd']))),
             ([97, 99], [97, 100], [98, 99], [98, 100]))
-        self.assertEqual(list(map(lambda x: x[0] * x[1], product([12, 16], [15, 20]))), [180, 240, 240, 320])
+        self.assertEqual(
+            list(map(lambda x: x[0] * x[1], product([12, 16], [15, 20]))),
+            [180, 240, 240, 320])
 
     def test_permutations(self):
         self.assertEqual(list(permutations("abc")), [('a', 'b', 'c'),
@@ -104,6 +105,20 @@ class TestFunctions(unittest.TestCase):
                 list(
                     filter(lambda x: len(set(x)) == 1, combinations("mttt",
                                                                     2)))), 3)
+
+    def test_permutations_repetitions(self):
+        self.assertEqual(list(permutations_repetitions([1, 2, 3], 2)),
+                         [[1, 1], [1, 2], [1, 3], [2, 1], [2, 2], [2, 3],
+                          [3, 1], [3, 2], [3, 3]])
+        self.assertEqual(list(permutations_repetitions([1, 2, 3], 1)),
+                         [[1], [2], [3]])
+        self.assertEqual(
+            tuple(zip(permutations_repetitions(["a", "b"], 2), range(4))),
+            ((['a', 'a'], 0), (['a', 'b'], 1), (['b', 'a'], 2),
+             (['b', 'b'], 3)))
+        self.assertEqual(
+            list(map(lambda x: x * 2, permutations_repetitions([1, 2], 2))),
+            [[1, 1, 1, 1], [1, 2, 1, 2], [2, 1, 2, 1], [2, 2, 2, 2]])
 
 
 if __name__ == '__main__':
