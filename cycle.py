@@ -17,11 +17,10 @@ def cycle(iterable, endpoint=None):
                 # a generated object for iterable var
                 ans.append(letters)
                 # appending the generator in the empty list
-            while ans:
-                # excluding the None and negative cases and making an infinite loop
-                for letters in ans:
-                    yield letters
-                    # returning a generator of the ans list
+            for letters in ans*endpoint:
+                # making a loop of endpoint number of times
+                yield letters
+                # returning a generator of the ans list
 
     except TypeError:
         # preventing the Type error
