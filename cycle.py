@@ -23,5 +23,4 @@ def cycle(iterable, endpoint=None):
                 # returning a generator of the ans list
 
     except TypeError:
-        # preventing the Type error
-        print("Type error")
+        raise TypeError
