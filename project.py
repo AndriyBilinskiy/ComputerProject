@@ -62,6 +62,8 @@ def combinations_with_replacement(iterable, r: int):
         indices[i:] = [indices[i] + 1] * (r - i)
         yield tuple(iterable[i] for i in indices)
 
+
+   
 def cycle(iterable, endpoint=None):
     """
     Function for itertools.cycle()
@@ -69,24 +71,22 @@ def cycle(iterable, endpoint=None):
     Returns a generator of a cycle
     :param iterable: str
     :param endpoint: optional
-    for _ in cycle(iterable): print("x")
     """
     try:
         # processing exceptions
         if endpoint is not None:
             # making an endpoint
-            ans = []
+            ans: list = []
             # an empty list for an answer
             for letters in iterable:
                 yield letters
                 # a generated object for iterable var
                 ans.append(letters)
                 # appending the generator in the empty list
-            while ans:
-                # excluding the None and negative cases and making an infinite loop
-                for letters in ans:
-                    yield letters
-                    # returning a generator of the ans list
+            for letters in ans*endpoint:
+                # making a loop of endpoint number of times
+                yield letters
+                # returning a generator of the ans list
 
     except TypeError:
         # preventing the Type error
