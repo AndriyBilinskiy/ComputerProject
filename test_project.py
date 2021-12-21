@@ -74,7 +74,7 @@ class TestFunctions(unittest.TestCase):
                 map(lambda x: list(map(ord, x)), product(['a', 'b'],
                                                          ['c', 'd']))),
             ([97, 99], [97, 100], [98, 99], [98, 100]))
-        self.assertEqual(list(product(12)), [])
+        self.assertEqual(list(map(lambda x: x[0] * x[1], product([12, 16], [15, 20]))), [180, 240, 240, 320])
 
     def test_permutations(self):
         self.assertEqual(list(permutations("abc")), [('a', 'b', 'c'),
