@@ -52,7 +52,7 @@ def combinations_with_replacement(iterable, r: int):
     lenth = len(iterable)
     if r > lenth :
         raise ValueError
-    indices = [0] * r
+    indices = [0 for _ in range(r)]
     yield tuple(iterable[i] for i in indices)
     while True:
         for i in reversed(range(r)):
