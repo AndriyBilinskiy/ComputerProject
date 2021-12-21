@@ -1,3 +1,4 @@
+import copy
 def repeat(value, stop_point=None):
     """
     The following function mirrors the behaviour of eponymous
@@ -155,6 +156,23 @@ def combinations(iterable, r):
             indices[j] = indices[j-1] + 1
         yield tuple(pool[i] for i in indices)
 def combinations_order_matters(iterable, r: int):
+    """
+    This function returns r length combinations with replacrment(Order does metter)
+    """
+    if r > len(iterable): # ensures that the length of combinations is 
+        #less than the lenth of a iterable object
+        raise ValueError
+
+    def create_coombinations(current_coombination, r, iterable):
+        for element in iterable:
+            current_coombination_copy = copy.copy(current_coombination)
+            current_coombination_copy.append(element)
+            if len(current_coombination_copy) == r:
+                yield current_coombination_copy
+            else:
+                yield from create_coombinations(current_coombination_copy, r, iterable)
+    yield from create_coombinations([], r, iterable)
+def permutations_repetitions(iterable, r: int):
     """
     This function returns r length combinations with replacrment(Order does metter)
     """
